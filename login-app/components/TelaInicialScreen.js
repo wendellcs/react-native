@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet} from "react-native-web";
+import { View, Text} from "react-native-web";
+import { styles } from "./styles";
 
 export default function TelaInicialScreen({route}){
     const {email} = route.params
@@ -8,19 +9,6 @@ export default function TelaInicialScreen({route}){
             <Text style={styles.welcomeText}>
                 Bem-vindo, {email}!
             </Text>
-
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    welcomeText: {
-        fontSize: 24,
-        fontWeight: 'bold'
-    }
-})
