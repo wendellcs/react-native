@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, Button, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import db from "./db";
 import BotaoCustomizado from "./Botoes";
 
@@ -8,20 +8,15 @@ export default function ListaDeProdutos({navigation}){
 
     useEffect(() => {
         carregarProdutos()
-    }, [])
+    }, [produtos])
 
     async function carregarProdutos(){
         const data = await db.produtos.toArray()
-
         setProdutos(data)
     }
 
-    async function excluirProduto(item) {
-        
-    }
-
-    async function editarProduto(item) {
-        
+    async function excluirProduto(id) {
+        await db.produtos.delete(id)
     }
 
     return (
@@ -37,7 +32,7 @@ export default function ListaDeProdutos({navigation}){
                         </View>
 
                         <View style={styles.btnView}>
-                            <BotaoCustomizado title={"Editar"} onPress={editarProduto} padding={5}/>
+                            <BotaoCustomizado title={"Editar"} onPress={() => navigation.navigate('EditarProduto', {id: item.id})} padding={5}/>
                             <BotaoCustomizado title={"Excluir"} onPress={() => {excluirProduto(item.id)}} padding={5} marginLeft={5}/>
                         </View>
                     </View>
